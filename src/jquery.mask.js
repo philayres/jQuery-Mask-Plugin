@@ -265,7 +265,9 @@
                     }, 10);
 
                     p.val(newVal);
-                    p.setCaret(caretPos);
+                    /* Do not set the caret position here, since it incorrectly records 
+                       the position of the caret before the timeout callback */                    
+                    // p.setCaret(caretPos);
                     return p.callbacks(e);
                 }
             },
