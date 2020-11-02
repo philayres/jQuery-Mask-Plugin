@@ -1,6 +1,7 @@
 /**
  * jquery.mask.js
- * @version: v1.14.12
+ * @version: v1.14.12.1 
+ *   (patched by Phil Ayres - see https://github.com/consected/jQuery-Mask-Plugin/commit/5fc2cd5723acab64ef214f4089a88747766d8708 )
  * @author: Igor Escobar
  *
  * Created by Igor Escobar on 2012-03-10. Please report any bug at github.com/igorescobar/jQuery-Mask-Plugin
