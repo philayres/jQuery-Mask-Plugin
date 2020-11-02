@@ -1,11 +1,12 @@
 /**
  * jquery.mask.js
- * @version: v1.14.12
+ * @version: v1.14.12.1 
+ *   (patched by Phil Ayres - see https://github.com/consected/jQuery-Mask-Plugin/commit/5fc2cd5723acab64ef214f4089a88747766d8708 )
  * @author: Igor Escobar
  *
- * Created by Igor Escobar on 2012-03-10. Please report any bug at github.com/igorescobar/jQuery-Mask-Plugin
+ * Created by Igor Escobar on 2012-03-10. Please report any bug at http://blog.igorescobar.com
  *
- * Copyright (c) 2012 Igor Escobar http://igorescobar.com
+ * Copyright (c) 2012 Igor Escobar http://blog.igorescobar.com
  *
  * The MIT License (http://www.opensource.org/licenses/mit-license.php)
  *
@@ -38,7 +39,7 @@
 'use strict';
 
 // UMD (Universal Module Definition) patterns for JavaScript modules that work everywhere.
-// https://github.com/umdjs/umd/blob/master/templates/jqueryPlugin.js
+// https://github.com/umdjs/umd/blob/master/jqueryPluginCommonjs.js
 (function (factory, jQuery, Zepto) {
 
     if (typeof define === 'function' && define.amd) {
@@ -265,7 +266,9 @@
                     }, 10);
 
                     p.val(newVal);
-                    p.setCaret(caretPos);
+                    /* Do not set the caret position here, since it incorrectly records
+                       the position of the caret before the timeout callback */
+                    //p.setCaret(caretPos);
                     return p.callbacks(e);
                 }
             },
@@ -590,9 +593,11 @@
         $.applyDataMask();
     }
 
-    setInterval(function() {
-        if ($.jMaskGlobals.watchDataMask) {
-            $.applyDataMask();
-        }
-    }, globals.watchInterval);
+    if ($.jMaskGlobals.watchDataMask) {
+      setInterval(function() {
+          if ($.jMaskGlobals.watchDataMask) {
+              $.applyDataMask();
+          }
+      }, globals.watchInterval);
+    }
 }, window.jQuery, window.Zepto));
